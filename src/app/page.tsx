@@ -25,7 +25,7 @@ export default function IndexPage() {
         >
           Documentation
         </Link>
-        <Button>Hey yiu</Button>
+        <Button isLoading>Hey yiu</Button>
         <Link
           target="_blank"
           rel="noreferrer"

@@ -2,8 +2,7 @@ export type SiteConfig = typeof siteConfig
 
 export const siteConfig = {
   name: "Breadit",
-  description:
-    "Beautifully designed components built with Radix UI and Tailwind CSS.",
+  description: "A reddit clone built with Next.js and  Typescript",
   mainNav: [
     {
       title: "Home",
