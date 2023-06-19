@@ -2,6 +2,7 @@ import Link from "next/link";
 import { getServerSession } from "next-auth";
 
 import { Icons } from "./Icon";
+import UserAccountNav from "./UserAccountNav";
 import { ThemeToggle } from "./theme-toggle";
 import { buttonVariants } from "./ui/button";
 
@@ -19,8 +20,8 @@ const Navbar = async () => {
         </Link>
 
         <ThemeToggle />
-        {session ? (
-          <p>Logged in as {session.user.name}</p>
+        {session?.user ? (
+          <UserAccountNav user={session.user} />
         ) : (
           <Link href="/sign-in" className={buttonVariants()}>
             Login

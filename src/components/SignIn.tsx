@@ -1,8 +1,7 @@
-import Link from "next/link"
+import Link from "next/link";
 
-import { Icons } from "./Icon"
-import UserAuthForm from "./UserAuthForm"
-import { ThemeToggle } from "./theme-toggle"
+import { Icons } from "./Icon";
+import UserAuthForm from "./UserAuthForm";
 
 const SignIn = () => {
   return (
@@ -26,6 +25,6 @@ const SignIn = () => {
         </p>
       </div>
     </div>
-  )
-}
-export default SignIn
+  );
+};
+export default SignIn;

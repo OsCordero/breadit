@@ -1,8 +1,8 @@
-import Link from "next/link"
+import Link from "next/link";
 
-import { cn } from "@/lib/utils"
-import { buttonVariants } from "@/components/ui/button"
-import SignIn from "@/components/SignIn"
+import { cn } from "@/lib/utils";
+import { buttonVariants } from "@/components/ui/button";
+import SignIn from "@/components/SignIn";
 
 const SignInPage = () => {
   return (
@@ -15,11 +15,11 @@ const SignInPage = () => {
             "-mt-20 self-start"
           )}
         >
-          go home
+          Home
         </Link>
         <SignIn />
       </div>
     </div>
-  )
-}
-export default SignInPage
+  );
+};
+export default SignInPage;
