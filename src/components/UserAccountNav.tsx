@@ -37,6 +37,10 @@ const UserAccountNav = ({ user }: UserAccountNavProps) => {
         <DropdownMenuItem className=" text-zinc-700 dark:text-slate-50 dark:hover:bg-slate-700">
           <Link href="/">Feed</Link>
         </DropdownMenuItem>
+
+        <DropdownMenuItem className=" text-zinc-700 dark:text-slate-50 dark:hover:bg-slate-700">
+          <Link href="/r/create">Create community</Link>
+        </DropdownMenuItem>
         <DropdownMenuItem
           className=" text-zinc-700 dark:text-slate-50 dark:hover:bg-slate-700 "
           asChild

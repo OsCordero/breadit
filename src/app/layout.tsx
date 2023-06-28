@@ -31,8 +31,6 @@ interface RootLayoutProps {
 }
 
 export default function RootLayout({ children, authModal }: RootLayoutProps) {
-  console.log(authModal);
-
   return (
     <>
       <html lang="en" suppressHydrationWarning>
@@ -44,8 +42,9 @@ export default function RootLayout({ children, authModal }: RootLayoutProps) {
         >
           <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
             <div className="min-h-screen bg-slate-50 pt-12 antialiased dark:bg-slate-900">
+              {/* @ts-ignore */}
               <Navbar />
-              {/* {authModal} */}
+              {authModal}
               <div className="mx-w-7xl container mx-auto h-full pt-12">
                 {children}
               </div>
