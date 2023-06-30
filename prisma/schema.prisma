@@ -28,6 +28,7 @@ model Account {
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([provider, providerAccountId])
+  @@index([userId])
 }
 
 model Session {
@@ -36,6 +37,8 @@ model Session {
   userId       String
   expires      DateTime
   user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
 }
 
 model User {
@@ -45,7 +48,104 @@ model User {
   emailVerified DateTime?
   username      String?   @unique
 
-  image    String?
-  accounts Account[]
-  sessions Session[]
+  createdSubreddits Subreddit[]    @relation("CreatedBy")
+  image             String?
+  accounts          Account[]
+  sessions          Session[]
+  Post              Post[]
+  Comment           Comment[]
+  CommentVote       CommentVote[]
+  Vote              Vote[]
+  Subscription      Subscription[]
+}
+
+model Subreddit {
+  id        String   @id @default(cuid())
+  name      String   @unique
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  posts     Post[]
+
+  creator     User           @relation("CreatedBy", fields: [creatorId], references: [id])
+  creatorId   String
+  subscribers Subscription[]
+
+  @@index([name])
+  @@index([creatorId])
+}
+
+model Subscription {
+  user        User      @relation(fields: [userId], references: [id])
+  userId      String
+  subreddit   Subreddit @relation(fields: [subredditId], references: [id])
+  subredditId String
+
+  @@id([userId, subredditId])
+  @@index([subredditId])
+  @@index([userId])
+}
+
+model Post {
+  id          String    @id @default(cuid())
+  title       String
+  content     Json?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  subreddit   Subreddit @relation(fields: [subredditId], references: [id])
+  subredditId String
+  author      User      @relation(fields: [authorId], references: [id])
+  authorId    String
+  comments    Comment[]
+  Vote        Vote[]
+
+  @@index([subredditId])
+  @@index([authorId])
+}
+
+enum VoteType {
+  UPVOTE
+  DOWNVOTE
+}
+
+model Vote {
+  user   User     @relation(fields: [userId], references: [id])
+  userId String
+  post   Post     @relation(fields: [postId], references: [id])
+  postId String
+  type   VoteType
+
+  @@id([userId, postId])
+  @@index([postId])
+  @@index([userId])
+}
+
+model Comment {
+  id        String        @id @default(cuid())
+  text      String
+  createdAt DateTime      @default(now())
+  updatedAt DateTime      @updatedAt
+  author    User          @relation(fields: [authorId], references: [id])
+  authorId  String
+  post      Post          @relation(fields: [postId], references: [id])
+  postId    String
+  parent    Comment?      @relation("CommentToComment", fields: [parentId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  parentId  String?
+  children  Comment[]     @relation("CommentToComment")
+  votes     CommentVote[]
+  commentId String?
+
+  @@index([parentId])
+  @@index([authorId])
+  @@index([postId])
+}
+
+model CommentVote {
+  user      User     @relation(fields: [userId], references: [id])
+  userId    String
+  comment   Comment  @relation(fields: [commentId], references: [id])
+  commentId String
+  type      VoteType
+
+  @@id([userId, commentId])
+  @@index([commentId])
 }
