@@ -4,10 +4,9 @@ import { Metadata } from "next";
 import { siteConfig } from "@/config/site";
 import { fontSans } from "@/lib/fonts";
 import { cn } from "@/lib/utils";
-import { Toaster } from "@/components/ui/toaster";
 import Navbar from "@/components/Navbar";
+import Providers from "@/components/Providers";
 import { TailwindIndicator } from "@/components/tailwind-indicator";
-import { ThemeProvider } from "@/components/theme-provider";
 
 export const metadata: Metadata = {
   title: {
@@ -40,7 +39,7 @@ export default function RootLayout({ children, authModal }: RootLayoutProps) {
             fontSans.variable
           )}
         >
-          <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+          <Providers>
             <div className="min-h-screen bg-slate-50 pt-12 antialiased dark:bg-slate-900">
               {/* @ts-ignore */}
               <Navbar />
@@ -50,8 +49,7 @@ export default function RootLayout({ children, authModal }: RootLayoutProps) {
               </div>
             </div>
             <TailwindIndicator />
-            <Toaster />
-          </ThemeProvider>
+          </Providers>
         </body>
       </html>
     </>
