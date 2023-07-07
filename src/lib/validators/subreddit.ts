@@ -5,8 +5,7 @@ export const subredditSchema = z.object({
 });
 
 export const subredditSubscriptionSchema = z.object({
-  subredditId: z.string().uuid(),
-  userId: z.string().uuid(),
+  subredditId: z.string(),
 });
 
 export type CreateSubredditPayload = z.infer<typeof subredditSchema>;

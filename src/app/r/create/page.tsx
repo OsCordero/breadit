@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 
-import { useCreateSubreddit } from "@/hooks/mutations";
+import { useCreateSubreddit } from "@/hooks/mutations/subreddits";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 
