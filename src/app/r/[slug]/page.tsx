@@ -1,5 +1,5 @@
 import { notFound } from "next/navigation";
-import { PAGINE_SIZE } from "@/config";
+import { PAGE_SIZE } from "@/config";
 
 import { getAuthSession } from "@/lib/auth";
 import { db } from "@/lib/db";
@@ -21,7 +21,7 @@ const Page = async ({ params }: PageProps) => {
     include: {
       posts: {
         include: { author: true, comments: true, subreddit: true, votes: true },
-        take: PAGINE_SIZE,
+        take: PAGE_SIZE,
       },
     },
   });
