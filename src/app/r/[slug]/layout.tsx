@@ -1,8 +1,10 @@
+import Link from "next/link";
 import { notFound } from "next/navigation";
 import { format } from "date-fns";
 
 import { getAuthSession } from "@/lib/auth";
 import { db } from "@/lib/db";
+import { Button, buttonVariants } from "@/components/ui/button";
 import SubscribeLeaveToggle from "@/components/SubscribeLeaveToggle";
 
 interface LayoutProps {
@@ -86,6 +88,15 @@ const Layout = async ({ children, params }: LayoutProps) => {
                   isSubscribed={isSubscribed}
                 />
               ) : null}
+              <Link
+                href={`/r/${subreddit.name}/submit`}
+                className={buttonVariants({
+                  variant: "outline",
+                  className: "w-full mb-8 !border-b dark:!outline-white",
+                })}
+              >
+                Create a post
+              </Link>
             </dl>
           </div>
         </div>

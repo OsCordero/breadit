@@ -24,7 +24,7 @@ const SubscribeLeaveToggle = ({
 
   return isSubscribed ? (
     <Button
-      className="w-full mt-1 mb-4"
+      className="w-full mt-1 mb-4 dark:!outline-white"
       onClick={() => unsubscribe()}
       isLoading={isUnsubscribing}
       disabled={isUnsubscribing}
@@ -33,7 +33,7 @@ const SubscribeLeaveToggle = ({
     </Button>
   ) : (
     <Button
-      className="w-full mt-1 mb-4"
+      className="w-full mt-1 mb-4 dark:!outline-white"
       onClick={() => subscribe()}
       isLoading={isSubscribing}
       disabled={isSubscribing}
