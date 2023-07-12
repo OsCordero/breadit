@@ -1,9 +1,12 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  images: {
+    domains: ["uploadthing.com", "lh3.googleusercontent.com"],
+  },
   reactStrictMode: true,
   experimental: {
     appDir: true,
   },
-}
+};
 
-export default nextConfig
+export default nextConfig;

@@ -1,6 +1,5 @@
 import { notFound } from "next/navigation";
 
-import { getAuthSession } from "@/lib/auth";
 import { db } from "@/lib/db";
 
 import Editor from "./components/Editor";
@@ -13,7 +12,6 @@ interface PageProps {
 
 const Page = async ({ params }: PageProps) => {
   const { slug } = params;
-  const session = await getAuthSession();
   const subreddit = await db.subreddit.findUnique({
     where: {
       name: slug,

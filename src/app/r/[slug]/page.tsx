@@ -3,7 +3,9 @@ import { PAGE_SIZE } from "@/config";
 
 import { getAuthSession } from "@/lib/auth";
 import { db } from "@/lib/db";
-import MiniCreatePost from "@/components/MiniCreatePost";
+
+import MiniCreatePost from "./components/MiniCreatePost";
+import PostsFeed from "./components/PostsFeed";
 
 interface PageProps {
   params: {
@@ -35,6 +37,10 @@ const Page = async ({ params }: PageProps) => {
         r/{subreddit.name}
       </h1>
       <MiniCreatePost session={session} />
+      <PostsFeed
+        initialPosts={subreddit.posts}
+        subredditName={subreddit.name}
+      />
     </div>
   );
 };

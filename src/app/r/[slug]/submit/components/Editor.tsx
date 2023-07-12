@@ -15,7 +15,7 @@ const Editor = ({ subredditId }: { subredditId: string }) => {
   const editorRef = useRef<EditorJS>();
   const firstRender = useRef(true);
 
-  const { mutate, isLoading } = useCreatePost();
+  const { mutate, isLoading, isSuccess } = useCreatePost();
   const { register, handleSubmit } = useForm<PostType>({
     resolver: zodResolver(postSchema),
     defaultValues: {
@@ -132,7 +132,7 @@ const Editor = ({ subredditId }: { subredditId: string }) => {
           className="w-full"
           form="subreddit-post-form"
           isLoading={isLoading}
-          disabled={isLoading}
+          disabled={isLoading || isSuccess}
         >
           Post
         </Button>
