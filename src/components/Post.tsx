@@ -29,7 +29,7 @@ const Post = ({
   const { data: session } = useSession();
 
   return (
-    <div className="rounded shadow">
+    <div className="rounded shadow bg-white dark:bg-slate-900 mb-4">
       <div className="px-6 py-4 flex justify-between relative">
         {session ? (
           <PostVote

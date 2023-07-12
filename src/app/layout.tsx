@@ -35,12 +35,12 @@ export default function RootLayout({ children, authModal }: RootLayoutProps) {
       <html lang="en" suppressHydrationWarning>
         <body
           className={cn(
-            "light bg-background font-sans text-slate-900 antialiased  dark:text-slate-50",
+            "light bg-slate-50 font-sans text-slate-900 antialiased  dark:text-slate-50 dark:bg-background",
             fontSans.variable
           )}
         >
           <Providers>
-            <div className="min-h-screen bg-background pt-12 antialiased ">
+            <div className="min-h-screen pt-12 antialiased ">
               <Navbar />
               {authModal}
               <div className="mx-w-7xl container mx-auto h-full pt-12">

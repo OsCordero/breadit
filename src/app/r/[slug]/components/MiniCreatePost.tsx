@@ -17,7 +17,7 @@ const MiniCreatePost = ({ session }: MiniCreatePostProps) => {
   const pathname = usePathname();
 
   return (
-    <div className="overflow-hidden rounded-md bg-white shadow dark:bg-slate-700">
+    <div className="overflow-hidden rounded-md bg-white shadow dark:bg-slate-800 mb-4">
       <div className="h-full px-6 py-4 flex justify-between gap-6">
         <div className="relative">
           <UserAvatar
