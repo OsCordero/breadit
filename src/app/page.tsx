@@ -1,14 +1,19 @@
 import Link from "next/link";
 import { Home } from "lucide-react";
 
+import { getAuthSession } from "@/lib/auth";
 import { buttonVariants } from "@/components/ui/button";
+import CustomFeed from "@/components/CustomFeed";
+import GeneralFeed from "@/components/GeneralFeed";
 
-export default function IndexPage() {
+export default async function IndexPage() {
+  const session = await getAuthSession();
   return (
     <section>
       <h1 className="font-bold text-3xl md:text-4xl leading-tight">Home</h1>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-y-4 md:gap-x-4 py-6">
         {/* FEED */}
+        {session ? <CustomFeed /> : <GeneralFeed />}
 
         <div className="overflow-hidden h-fit rounded-lg border border-gray-200 order-first md:order-last dark:border-gray-700">
           <div className="bg-emerald-100 px-6 py-4 dark:bg-gray-800">

@@ -24,6 +24,7 @@ const Page = async ({ params }: PageProps) => {
       posts: {
         include: { author: true, comments: true, subreddit: true, votes: true },
         take: PAGE_SIZE,
+        orderBy: { createdAt: "desc" },
       },
     },
   });

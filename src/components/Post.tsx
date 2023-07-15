@@ -52,7 +52,7 @@ const Post = ({
               </>
             ) : null}
             <span>Posted by u/{post.author.name}</span>{" "}
-            {formatTimeToNow(post.createdAt)}
+            {formatTimeToNow(new Date(post.createdAt))}
           </div>
           <Link href={`/r/${subredditName}/post/${post.id}`}>
             <span className="text-lg font-semibold  py-2 leading-6 ">

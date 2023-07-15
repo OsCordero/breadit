@@ -1,7 +1,7 @@
 "use client";
 
 import { usePathname, useRouter } from "next/navigation";
-import { Link2 } from "lucide-react";
+import { ImageIcon, Link2 } from "lucide-react";
 import { Session } from "next-auth";
 
 import UserAvatar from "../../../../components/UserAvatar";
@@ -30,7 +30,7 @@ const MiniCreatePost = ({ session }: MiniCreatePostProps) => {
           onClick={() => router.push(`${pathname}/submit`)}
           variant={"ghost"}
         >
-          post
+          <ImageIcon className="text-zinc-600 dark:text-zinc-300" />
         </Button>
 
         <Button

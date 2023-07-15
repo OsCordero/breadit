@@ -10,3 +10,8 @@ const extendedPost = Prisma.validator<Prisma.PostArgs>()({
 });
 
 export type ExtendedPost = Prisma.PostGetPayload<typeof extendedPost>;
+
+export type ExtendpedPostResponse = {
+  posts: ExtendedPost[];
+  totalPosts: number;
+};

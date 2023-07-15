@@ -6,7 +6,7 @@ import axios from "axios";
 import { useSession } from "next-auth/react";
 import { useInView } from "react-intersection-observer";
 
-import { ExtendedPost } from "@/types/db";
+import { ExtendedPost, ExtendpedPostResponse } from "@/types/db";
 import Post from "@/components/Post";
 
 interface PostsFeedProps {
@@ -18,27 +18,35 @@ const PostsFeed = ({ initialPosts, subredditName }: PostsFeedProps) => {
   const { data: session } = useSession();
   const { ref, inView, entry } = useInView({
     threshold: 1,
+    onChange: (inView, entry) => {
+      if (inView && entry?.isIntersecting) {
+        fetchNextPage();
+      }
+    },
   });
 
-  // const { data, fetchNextPage, isFetchingNextPage } = useInfiniteQuery(
-  //   ["posts", subredditName],
-  //   async ({ pageParam = 1 }) => {
-  //     const { data } = await axios.get<ExtendedPost[]>(
-  //       `/api/posts?limit${PAGE_SIZE}&page=${pageParam}&subreddit=${subredditName}`
-  //     );
-  //     return data;
-  //   },
-  //   {
-  //     getNextPageParam: (lastPage, allPages) => {
-  //       if (lastPage.length < PAGE_SIZE) return false;
-  //       return allPages.length + 1;
-  //     },
-  //     initialData: { pages: [initialPosts], pageParams: [1] },
-  //   }
-  // );
+  const { data, fetchNextPage, isFetchingNextPage } = useInfiniteQuery(
+    ["posts", subredditName],
+    async ({ pageParam = 1 }) => {
+      const { data } = await axios.get<ExtendpedPostResponse>(
+        `/api/posts?limit=${PAGE_SIZE}&page=${pageParam}&subreddit=${subredditName}`
+      );
+      return data;
+    },
+    {
+      getNextPageParam: (lastPage, allPages) => {
+        if (allPages.length < lastPage.totalPosts / PAGE_SIZE) {
+          return allPages.length + 1;
+        }
+      },
+      initialData: {
+        pages: [{ posts: initialPosts, totalPosts: 100000 }],
+        pageParams: [1],
+      },
+    }
+  );
 
-  // const posts = data?.pages.flatMap((page) => page) ?? initialPosts;
-  const posts = initialPosts;
+  const posts = data?.pages.flatMap((page) => page.posts) ?? initialPosts;
 
   return (
     <ul className="flex flex-col col-span-2 space-y-6">
