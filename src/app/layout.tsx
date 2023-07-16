@@ -41,6 +41,7 @@ export default function RootLayout({ children, authModal }: RootLayoutProps) {
         >
           <Providers>
             <div className="min-h-screen pt-12 antialiased ">
+              {/* @ts-ignore */}
               <Navbar />
               {authModal}
               <div className="mx-w-7xl container mx-auto h-full pt-12">

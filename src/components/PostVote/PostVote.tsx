@@ -36,11 +36,12 @@ const PostVote = ({ postId, initialVote, initialVoteCount }: PostVoteProps) => {
     onError: (err, voteType) => {
       if (voteType === "UPVOTE") setVotesCount((prev) => prev - 1);
       else setVotesCount((prev) => prev + 1);
+      console.log(previousVote.current);
 
       setVote(previousVote.current);
       if (err instanceof AxiosError) {
         if (err.response?.status === 401) {
-          loginToast();
+          return loginToast();
         }
       }
       return toast({
@@ -48,6 +49,9 @@ const PostVote = ({ postId, initialVote, initialVoteCount }: PostVoteProps) => {
         description: "Your vote could not be processed. Please try again.",
         variant: "destructive",
       });
+    },
+    onSuccess: () => {
+      previousVote.current = vote;
     },
   });
 
@@ -62,8 +66,6 @@ const PostVote = ({ postId, initialVote, initialVoteCount }: PostVoteProps) => {
         setVotesCount((prev) => prev + (vote === "DOWNVOTE" ? 2 : 1));
       else setVotesCount((prev) => prev - (vote === "UPVOTE" ? 2 : 1));
     }
-
-    previousVote.current = voteType;
 
     mutate(voteType);
   };
