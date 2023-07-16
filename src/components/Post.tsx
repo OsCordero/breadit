@@ -1,10 +1,9 @@
 "use client";
-
 import { Post, User, Vote } from "@prisma/client";
+import { useRef } from "react";
+import Link from "next/link";
 import { MessageSquare } from "lucide-react";
 import { useSession } from "next-auth/react";
-import Link from "next/link";
-import { useRef } from "react";
 
 import { formatTimeToNow } from "@/lib/utils";
 
@@ -31,13 +30,12 @@ const Post = ({
   return (
     <div className="rounded shadow bg-white dark:bg-slate-900 mb-4">
       <div className="px-6 py-4 flex justify-between relative">
-        {session ? (
-          <PostVote
-            initialVote={currentVote?.type}
-            initialVoteCount={votesCount}
-            postId={post.id}
-          />
-        ) : null}
+        <PostVote
+          initialVote={currentVote?.type}
+          initialVoteCount={votesCount}
+          postId={post.id}
+        />
+
         <div className="flex-1">
           <div className="max-h-40 mt-1 text-xs relative">
             {subredditName ? (
