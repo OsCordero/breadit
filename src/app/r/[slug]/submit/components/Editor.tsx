@@ -115,7 +115,7 @@ const Editor = ({ subredditId }: { subredditId: string }) => {
           className="w-fit"
           onSubmit={handleSubmit(onSubmit)}
         >
-          <div className="prose dark:prose-inverted">
+          <div className="prose dark:prose-invert">
             <TextareaAutosize
               autoFocus
               placeholder="Title"

@@ -4,13 +4,11 @@ import { useRef } from "react";
 import Link from "next/link";
 import { Post as PostType, User, Vote } from "@prisma/client";
 import { MessageSquare } from "lucide-react";
-import { useSession } from "next-auth/react";
 
 import { formatTimeToNow } from "@/lib/utils";
 
 import EditorOutput from "./EditorOutput";
 import PostVote from "./PostVote/PostVote";
-import PostVoteShell from "./PostVote/PostVoteShell";
 
 interface PostProps {
   subredditName?: string;

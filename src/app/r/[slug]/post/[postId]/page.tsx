@@ -66,8 +66,9 @@ const Page = async ({ params }: PageProps) => {
         <h1 className="text-xl font-semibold py-2 leading-6 text-gray-900 dark:text-gray-100">
           {post?.title ?? cachedPost.title}
         </h1>
-
-        <EditorOutput content={post?.content ?? cachedPost.content} />
+        <div className="prose dark:prose-invert max-w-none w-full">
+          <EditorOutput content={post?.content ?? cachedPost.content} />
+        </div>
 
         <Suspense
           fallback={<Loader2 className="h-5 w-5 animate-spin text-primary" />}
