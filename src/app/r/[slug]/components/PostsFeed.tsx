@@ -37,9 +37,9 @@ const PostsFeed = ({
     ["posts", subredditName],
     async ({ pageParam = 1 }) => {
       const { data } = await axios.get<ExtendpedPostResponse>(
-        `/api/posts?limit=${PAGE_SIZE}&page=${pageParam}&subreddit=${subredditName}${
-          discover ? "&discover=true" : ""
-        }`
+        `/api/posts?limit=${PAGE_SIZE}&page=${pageParam}${
+          subredditName ? `&subredditName=${subredditName}` : ""
+        }${discover ? "&discover=true" : ""}`
       );
       return data;
     },

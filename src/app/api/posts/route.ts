@@ -8,7 +8,6 @@ export async function GET(req: Request) {
   const url = new URL(req.url);
   const session = await getServerSession(authOptions);
   const discover = url.searchParams.get("discover");
-  console.log(discover);
 
   let followedSubredditsIds: string[] = [];
 
@@ -28,10 +27,10 @@ export async function GET(req: Request) {
       .object({
         limit: z.number().int().positive().default(25),
         page: z.number().int().positive().default(1),
-        subredditName: z.string().optional(),
+        subredditName: z.string().nullish().optional(),
       })
       .parse({
-        subredditNamme: url.searchParams.get("subredditName"),
+        subredditName: url.searchParams.get("subredditName"),
         limit: parseInt(url.searchParams.get("limit") ?? "25"),
         page: parseInt(url.searchParams.get("page") ?? "1"),
       });
