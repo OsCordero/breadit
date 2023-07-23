@@ -1,17 +1,16 @@
 import { Suspense } from "react";
 import { notFound } from "next/navigation";
 import { Post, User, Vote } from "@prisma/client";
-import { ArrowBigDown, ArrowBigUp, Loader2 } from "lucide-react";
+import { Loader2 } from "lucide-react";
 
 import { CachedPost } from "@/types/redis";
 import { db } from "@/lib/db";
 import { redis } from "@/lib/redis";
 import { formatTimeToNow } from "@/lib/utils";
-import { buttonVariants } from "@/components/ui/button";
 import CommentsSection from "@/components/CommentsSection";
 import EditorOutput from "@/components/EditorOutput";
-// import Post from "@/components/Post";
 import PostVoteServer from "@/components/PostVote/PostVoteServer";
+import PostVoteShell from "@/components/PostVote/PostVoteShell";
 
 interface PageProps {
   params: {
@@ -81,21 +80,4 @@ const Page = async ({ params }: PageProps) => {
   );
 };
 
-export function PostVoteShell() {
-  return (
-    <div className="flex items-center flex-col pr-6 w-20">
-      <div className={buttonVariants({ variant: "ghost" })}>
-        <ArrowBigUp className="h-5 w-5" />
-      </div>
-
-      <div className="text-center py-2 font-medium text-sm ">
-        <Loader2 className="h-3 w-3 animate-spin" />
-      </div>
-
-      <div className={buttonVariants({ variant: "ghost" })}>
-        <ArrowBigDown className="h-5 w-5" />
-      </div>
-    </div>
-  );
-}
 export default Page;
