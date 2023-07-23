@@ -1,4 +1,4 @@
-import { Vote } from "@prisma/client";
+import { CommentVote, Vote } from "@prisma/client";
 import { clsx, type ClassValue } from "clsx";
 import { formatDistanceToNowStrict } from "date-fns";
 import locale from "date-fns/locale/en-US";
@@ -58,8 +58,8 @@ export function formatTimeToNow(date: Date): string {
   });
 }
 
-export function countVotes(post: Vote[]) {
-  return post.reduce((acc, vote) => {
+export function countVotes(votes: (Vote | CommentVote)[]) {
+  return votes.reduce((acc, vote) => {
     if (vote.type === "UPVOTE") {
       return acc + 1;
     }

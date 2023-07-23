@@ -1,7 +1,8 @@
 "use client";
-import { Post, User, Vote } from "@prisma/client";
+
 import { useRef } from "react";
 import Link from "next/link";
+import { Post as PostType, User, Vote } from "@prisma/client";
 import { MessageSquare } from "lucide-react";
 import { useSession } from "next-auth/react";
 
@@ -9,10 +10,11 @@ import { formatTimeToNow } from "@/lib/utils";
 
 import EditorOutput from "./EditorOutput";
 import PostVote from "./PostVote/PostVote";
+import PostVoteShell from "./PostVote/PostVoteShell";
 
 interface PostProps {
   subredditName?: string;
-  post: Post & { author: User; votes: Vote[] };
+  post: PostType & { author: User; votes: Vote[] };
   commentCount?: number;
   votesCount: number;
   currentVote?: Vote;
@@ -25,7 +27,6 @@ const Post = ({
   currentVote,
 }: PostProps) => {
   const postRef = useRef<HTMLDivElement>(null);
-  const { data: session } = useSession();
 
   return (
     <div className="rounded shadow bg-white dark:bg-slate-900 mb-4">
@@ -49,7 +50,7 @@ const Post = ({
                 <span className="px-1">•</span>
               </>
             ) : null}
-            <span>Posted by u/{post.author.name}</span>{" "}
+            <span>Posted by u/{post.author.username}</span>{" "}
             {formatTimeToNow(new Date(post.createdAt))}
           </div>
           <Link href={`/r/${subredditName}/post/${post.id}`}>

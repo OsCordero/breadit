@@ -3,6 +3,8 @@
 import { PAGE_SIZE } from "@/config";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import axios from "axios";
+import { Loader2 } from "lucide-react";
+import { Session } from "next-auth";
 import { useSession } from "next-auth/react";
 import { useInView } from "react-intersection-observer";
 
@@ -12,11 +14,15 @@ import Post from "@/components/Post";
 interface PostsFeedProps {
   initialPosts: ExtendedPost[];
   subredditName?: string;
+  session?: Session | null;
 }
 
-const PostsFeed = ({ initialPosts, subredditName }: PostsFeedProps) => {
-  const { data: session } = useSession();
-  const { ref, inView, entry } = useInView({
+const PostsFeed = ({
+  initialPosts,
+  subredditName,
+  session,
+}: PostsFeedProps) => {
+  const { ref } = useInView({
     threshold: 1,
     onChange: (inView, entry) => {
       if (inView && entry?.isIntersecting) {
@@ -73,6 +79,10 @@ const PostsFeed = ({ initialPosts, subredditName }: PostsFeedProps) => {
           </li>
         );
       })}
+
+      {isFetchingNextPage && (
+        <Loader2 className="h-6 w-6 animate-spin mx-auto" />
+      )}
     </ul>
   );
 };

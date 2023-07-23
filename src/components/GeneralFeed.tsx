@@ -1,5 +1,6 @@
 import { PAGE_SIZE } from "@/config";
 
+import { getAuthSession } from "@/lib/auth";
 import { db } from "@/lib/db";
 import PostsFeed from "@/app/r/[slug]/components/PostsFeed";
 

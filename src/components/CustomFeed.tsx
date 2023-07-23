@@ -5,9 +5,9 @@ import { db } from "@/lib/db";
 import PostsFeed from "@/app/r/[slug]/components/PostsFeed";
 
 const CustomFeed = async () => {
-  const sesion = await getAuthSession();
+  const session = await getAuthSession();
   const followedSubreddits = await db.subscription.findMany({
-    where: { userId: sesion?.user?.id },
+    where: { userId: session?.user?.id },
     select: { subreddit: true },
   });
 
@@ -28,6 +28,6 @@ const CustomFeed = async () => {
     },
     take: PAGE_SIZE,
   });
-  return <PostsFeed initialPosts={posts} />;
+  return <PostsFeed initialPosts={posts} session={session} />;
 };
 export default CustomFeed;
