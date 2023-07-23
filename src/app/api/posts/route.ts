@@ -7,10 +7,12 @@ import { db } from "@/lib/db";
 export async function GET(req: Request) {
   const url = new URL(req.url);
   const session = await getServerSession(authOptions);
+  const discover = url.searchParams.get("discover");
+  console.log(discover);
 
   let followedSubredditsIds: string[] = [];
 
-  if (session) {
+  if (session && !discover) {
     const followedSubreddits = await db.subscription.findMany({
       where: { userId: session.user.id },
       include: { subreddit: true },
@@ -42,12 +44,14 @@ export async function GET(req: Request) {
           name: subredditName,
         },
       };
-    } else if (session) {
+    } else if (session && !discover) {
       whereClause = {
         subredditId: {
           in: followedSubredditsIds,
         },
       };
+    } else if (discover) {
+      whereClause = {};
     }
 
     const posts = await db.post.findMany({

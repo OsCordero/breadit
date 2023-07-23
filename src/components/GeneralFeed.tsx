@@ -1,6 +1,5 @@
 import { PAGE_SIZE } from "@/config";
 
-import { getAuthSession } from "@/lib/auth";
 import { db } from "@/lib/db";
 import PostsFeed from "@/app/r/[slug]/components/PostsFeed";
 
@@ -15,6 +14,6 @@ const GeneralFeed = async () => {
     },
     take: PAGE_SIZE,
   });
-  return <PostsFeed initialPosts={posts} />;
+  return <PostsFeed initialPosts={posts} discover />;
 };
 export default GeneralFeed;

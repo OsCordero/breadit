@@ -15,12 +15,14 @@ interface PostsFeedProps {
   initialPosts: ExtendedPost[];
   subredditName?: string;
   session?: Session | null;
+  discover?: boolean;
 }
 
 const PostsFeed = ({
   initialPosts,
   subredditName,
   session,
+  discover,
 }: PostsFeedProps) => {
   const { ref } = useInView({
     threshold: 1,
@@ -35,7 +37,9 @@ const PostsFeed = ({
     ["posts", subredditName],
     async ({ pageParam = 1 }) => {
       const { data } = await axios.get<ExtendpedPostResponse>(
-        `/api/posts?limit=${PAGE_SIZE}&page=${pageParam}&subreddit=${subredditName}`
+        `/api/posts?limit=${PAGE_SIZE}&page=${pageParam}&subreddit=${subredditName}${
+          discover ? "&discover=true" : ""
+        }`
       );
       return data;
     },
