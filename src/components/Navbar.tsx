@@ -2,6 +2,7 @@ import Link from "next/link";
 import { getServerSession } from "next-auth";
 
 import { Icons } from "./Icon";
+import SearchBar from "./SearchBar";
 import UserAccountNav from "./UserAccountNav";
 import { ThemeToggle } from "./theme-toggle";
 import { buttonVariants } from "./ui/button";
@@ -29,14 +30,18 @@ const Navbar = async () => {
           )}
         </div>
 
-        <ThemeToggle />
-        {session?.user ? (
-          <UserAccountNav user={session.user} />
-        ) : (
-          <Link href="/sign-in" className={buttonVariants()}>
-            Login
-          </Link>
-        )}
+        <SearchBar />
+
+        <div className="flex items-center gap-2">
+          <ThemeToggle />
+          {session?.user ? (
+            <UserAccountNav user={session.user} />
+          ) : (
+            <Link href="/sign-in" className={buttonVariants()}>
+              Login
+            </Link>
+          )}
+        </div>
       </div>
     </div>
   );

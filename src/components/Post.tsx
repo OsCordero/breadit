@@ -28,12 +28,15 @@ const Post = ({
 
   return (
     <div className="rounded shadow bg-white dark:bg-slate-900 mb-4">
-      <div className="px-6 py-4 flex justify-between relative">
-        <PostVote
-          initialVote={currentVote?.type}
-          initialVoteCount={votesCount}
-          postId={post.id}
-        />
+      <div className="px-6 py-4 flex flex-col-reverse justify-between relative sm:flex-row">
+        <div className="hidden sm:block">
+          <PostVote
+            initialVote={currentVote?.type}
+            initialVoteCount={votesCount}
+            postId={post.id}
+            key={post.id}
+          />
+        </div>
 
         <div className="flex-1">
           <div className="max-h-40 mt-1 text-xs relative">
@@ -68,7 +71,16 @@ const Post = ({
         </div>
       </div>
 
-      <div className="bg-secondary z-20 text-sm p-4 sm:px-6">
+      <div className="bg-secondary z-20 text-sm p-4 sm:px-6f flex items-center ">
+        <div className="sm:hidden">
+          <PostVote
+            initialVote={currentVote?.type}
+            initialVoteCount={votesCount}
+            postId={post.id}
+            key={post.id}
+          />
+        </div>
+
         <Link
           href={`/r/${subredditName}/post/${post.id}`}
           className="w-fit flex items-center gap-2"
