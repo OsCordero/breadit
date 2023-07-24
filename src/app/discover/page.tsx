@@ -22,7 +22,7 @@ export default async function DiscoverPage() {
           <div className="-my-3 pt-2 divide-y divide-gray-200 dark:divide-gray-700  px-6 pyy-4 text-sm leading-6">
             <div className="flex justify-between gap-x-4 py-3">
               <p className="text-zinc-600 dark:text-zinc-200">
-                Discover communities you'll love
+                Discover communities you&apos;ll love
               </p>
             </div>
             <Link
