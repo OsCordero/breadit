@@ -28,7 +28,6 @@ const PostVoteServer = async ({
     const post = await getData();
 
     if (!post) return notFound();
-    console.log(session);
 
     votesCount = countVotes(post.votes);
     currentVote = post.votes.find(

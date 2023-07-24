@@ -36,7 +36,6 @@ const PostVote = ({ postId, initialVote, initialVoteCount }: PostVoteProps) => {
     onError: (err, voteType) => {
       if (voteType === "UPVOTE") setVotesCount((prev) => prev - 1);
       else setVotesCount((prev) => prev + 1);
-      console.log(previousVote.current);
 
       setVote(previousVote.current);
       if (err instanceof AxiosError) {
