@@ -71,7 +71,7 @@ const PostComment: FC<PostCommentProps> = ({
       <div className="flex items-center">
         <UserAvatar
           user={{
-            name: comment.author.name || null,
+            username: comment.author.username || null,
             image: comment.author.image || null,
           }}
           className="h-6 w-6"
@@ -114,7 +114,18 @@ const PostComment: FC<PostCommentProps> = ({
       {isReplying ? (
         <div className="grid w-full gap-1.5 mt-2">
           <Label htmlFor="comment">Your comment</Label>
-          <div className="mt-2">
+          <form
+            className="mt-2"
+            onSubmit={(e) => {
+              e.preventDefault();
+              if (!input) return;
+              postComment({
+                postId,
+                text: input,
+                parentId: comment.parentId ?? comment.id, // default to top-level comment
+              });
+            }}
+          >
             <Textarea
               onFocus={(e) =>
                 e.currentTarget.setSelectionRange(
@@ -138,21 +149,11 @@ const PostComment: FC<PostCommentProps> = ({
               >
                 Cancel
               </Button>
-              <Button
-                isLoading={isLoading}
-                onClick={() => {
-                  if (!input) return;
-                  postComment({
-                    postId,
-                    text: input,
-                    parentId: comment.parentId ?? comment.id, // default to top-level comment
-                  });
-                }}
-              >
+              <Button type="submit" isLoading={isLoading}>
                 Post
               </Button>
             </div>
-          </div>
+          </form>
         </div>
       ) : null}
     </div>

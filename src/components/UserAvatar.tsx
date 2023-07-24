@@ -1,12 +1,12 @@
 import Image from "next/image";
+import { User } from "@prisma/client";
 import { AvatarProps } from "@radix-ui/react-avatar";
-import { User } from "next-auth";
 
 import { Icons } from "./Icon";
 import { Avatar, AvatarFallback } from "./ui/avatar";
 
 interface UserAvatarProps extends AvatarProps {
-  user: Pick<User, "name" | "image">;
+  user: Pick<User, "username" | "image">;
 }
 
 const UserAvatar = ({ user, ...props }: UserAvatarProps) => {
@@ -18,12 +18,12 @@ const UserAvatar = ({ user, ...props }: UserAvatarProps) => {
             fill
             src={user.image}
             referrerPolicy="no-referrer"
-            alt={user.name || ""}
+            alt={user.username || ""}
           />
         </div>
       ) : (
         <AvatarFallback>
-          <span className="sr-only">{user.name}</span>
+          <span className="sr-only">{user.username}</span>
           <Icons.user className="h-4 w-4" />
         </AvatarFallback>
       )}

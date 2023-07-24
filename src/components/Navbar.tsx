@@ -1,5 +1,7 @@
 import Link from "next/link";
-import { getServerSession } from "next-auth";
+import { User } from "@prisma/client";
+
+import { getAuthSession } from "@/lib/auth";
 
 import { Icons } from "./Icon";
 import SearchBar from "./SearchBar";
@@ -8,7 +10,7 @@ import { ThemeToggle } from "./theme-toggle";
 import { buttonVariants } from "./ui/button";
 
 const Navbar = async () => {
-  const session = await getServerSession();
+  const session = await getAuthSession();
 
   return (
     <div className="fixed inset-x-0 top-0 z-[10] h-fit border-b border-zinc-300 bg-zinc-100 py-2 dark:bg-slate-800 dark:border-slate-700">
@@ -35,7 +37,7 @@ const Navbar = async () => {
         <div className="flex items-center gap-2">
           <ThemeToggle />
           {session?.user ? (
-            <UserAccountNav user={session.user} />
+            <UserAccountNav user={session.user as User} />
           ) : (
             <Link href="/sign-in" className={buttonVariants()}>
               Login
