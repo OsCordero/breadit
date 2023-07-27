@@ -1,12 +1,8 @@
-# next-template
+# reddit clone
 
-A Next.js 13 template for building apps with Radix UI and Tailwind CSS.
+Reddit clone using Typescript, Next.js 13.4 with React Server Compoents, Prisma, MySQL database and tailwind
 
-## Usage
 
-```bash
-npx create-next-app -e https://github.com/shadcn/next-template
-```
 
 ## Features
 
@@ -17,6 +13,6 @@ npx create-next-app -e https://github.com/shadcn/next-template
 - Dark mode with `next-themes`
 - Tailwind CSS class sorting, merging and linting.
 
-## License
+## Check live demo:
 
-Licensed under the [MIT license](https://github.com/shadcn/ui/blob/main/LICENSE.md).
+https://breadit-iecj.vercel.app/
